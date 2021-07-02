@@ -1,5 +1,9 @@
 import { GetServerSideProps } from 'next';
+
+import { MovieList } from '../components/MovieList';
 import { tmdbApi } from '../services/tmdbApi';
+
+import { Container } from './styles';
 
 type Movie = {
   id: string;
@@ -9,7 +13,7 @@ type Movie = {
 
 type TvShow = {
   id: string;
-  name: string;
+  title: string;
   poster: string;
 }
 
@@ -20,7 +24,14 @@ interface HomeProps {
 
 export default function Home({ movies, tvShows }: HomeProps) {
   return (
-    <h1>Jetflix</h1>
+    <Container>
+      <h1>Movies</h1>
+      <MovieList movies={movies} />
+
+      <h1>TV Shows</h1>
+      <MovieList movies={tvShows} />
+    </Container>
+    
   );
 }
 
@@ -48,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const tvShows: Array<Movie> = tvShowsResponse.data.results.map(tvShow => {
     return {
       id: String(tvShow.id),
-      name: tvShow.name,
+      title: tvShow.name,
       poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tvShow.poster_path}`
     }
   }); 
