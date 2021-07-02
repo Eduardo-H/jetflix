@@ -12,9 +12,9 @@ export const Container = styled.button`
     height: 300px;
   }
 
-  transition: 0.3s ease;
+  transition: 0.2s ease;
 
   &:hover {
-    transform: translateY(-0.5rem);
+    filter: brightness(0.5);
   }
 `;

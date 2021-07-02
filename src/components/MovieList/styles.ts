@@ -30,7 +30,6 @@ export const Container = styled.div<ContainerProps>`
 
     background: rgba(0, 0, 0, 0.6);
     z-index: 99;
-    transform: translateY(-2px);
 
     cursor: pointer;
     opacity: 0;
