@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: String(movie.id),
       title: movie.title,
-      poster: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
       backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     }
   });
@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: String(movie.id),
       title: movie.title,
-      poster: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
       backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     }
   });
@@ -90,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: String(tvShow.id),
       title: tvShow.name,
-      poster: `https://image.tmdb.org/t/p/original${tvShow.poster_path}`
+      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tvShow.poster_path}`
     }
   }); 
 
