@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
   overflow-x: hidden;
-  padding: 1rem 0;
+  padding-bottom: 2rem;
 
   h1 {
     font-weight: 500;
