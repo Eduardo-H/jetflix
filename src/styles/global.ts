@@ -15,6 +15,19 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--gray-900);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--gray-700);
+      border-radius: 2rem;
+    }
   }
   
   @media (max-width:1080px) {
