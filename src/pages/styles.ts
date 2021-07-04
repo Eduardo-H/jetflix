@@ -7,6 +7,7 @@ export const Container = styled.main`
   h1 {
     font-weight: 500;
     padding: 1rem 5rem;
+    margin-top: 1rem;
   }
 
   @media (max-width: 800px) {
