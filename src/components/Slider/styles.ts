@@ -8,7 +8,7 @@ export const Container = styled.div`
     object-fit: cover;
     width: 100%;
     max-height: 600px;
-    filter: brightness(0.6);
+    filter: brightness(0.5);
   }
 `;
 
@@ -28,11 +28,10 @@ export const MovieInfo = styled.div`
   
   h2 {
     font-size: 4rem;
+    font-weight: 500;
   }
 
   @media (max-width:800px) {
-    word-wrap: break-word;
-
     h2 {
       font-size: 2rem;
     }

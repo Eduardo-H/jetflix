@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { 
   Navigation,
   Pagination,
+  Autoplay
 } from 'swiper/core';
 
 SwiperCore.use([Navigation, Pagination]);
@@ -26,10 +27,14 @@ export function Slider({ movies }: SliderProps) {
   return (
     <Container>
       <Swiper 
-        initialSlide={1}
+        initialSlide={0}
         navigation={true} 
         pagination={{
           "clickable": true
+        }}
+        autoplay={{
+          "delay": 2500,
+          "disableOnInteraction": false
         }}
         loop={true}
       >

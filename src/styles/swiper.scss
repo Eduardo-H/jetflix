@@ -1,5 +1,8 @@
 .swiper-button-next, 
 .swiper-button-prev {
+  top: 0 !important;
+  height: 100% !important;
+
   color: var(--green-500) !important;
   margin: 0rem 1rem !important;
 
