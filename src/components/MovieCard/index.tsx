@@ -1,16 +1,19 @@
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import Link from 'next/link';
 
 import { Container } from './styles';
 
 interface MovieCardProps {
+  id: string;
   title: string;
   poster: string;
 }
 
-export function MovieCard({ title, poster }: MovieCardProps) {
+export function MovieCard({ id, title, poster }: MovieCardProps) {
   return (
-    <Container>
-      <img src={poster} alt={title} />
-    </Container>
+    <Link href={`/movies/${id}`}>
+      <Container>
+        <img src={poster} alt={title} />
+      </Container>
+    </Link>
   )
 }
