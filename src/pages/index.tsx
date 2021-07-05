@@ -64,6 +64,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const moviesResponse = await tmdbApi.get('/discover/movie', {
     params: {
       api_key: process.env.TMDB_API_KEY,
+      'release_date.lte': new Date(),
       sort_by: 'popularity.desc',
       page: Math.floor(Math.random() * 10) + 1
     }
@@ -81,6 +82,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const tvShowsResponse = await tmdbApi.get('/discover/tv', {
     params: {
       api_key: process.env.TMDB_API_KEY,
+      'release_date.lte': new Date(),
       sort_by: 'popularity.desc',
       page: Math.floor(Math.random() * 10) + 1
     }
