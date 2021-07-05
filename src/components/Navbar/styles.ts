@@ -94,14 +94,6 @@ export const NavItems = styled.div`
   align-items: center;
   gap: 2rem;
 
-  a {
-    transition: 0.2s;
-
-    &:hover {
-      color: var(--green-500);
-    }
-  }
-
   @media (max-width: 800px) {
     flex-direction: column;
   }
