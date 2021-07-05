@@ -14,7 +14,7 @@ export type Movie = {
   backdrop: string;
 }
 
-type TvShow = {
+export type TvShow = {
   id: string;
   title: string;
   poster: string;
@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     params: {
       api_key: process.env.TMDB_API_KEY,
       'release_date.lte': new Date(),
-      'vote_average.gte': 5,
+      'vote_average.gte': 7,
       sort_by: 'popularity.desc',
       page: Math.floor(Math.random() * 10) + 1
     }
