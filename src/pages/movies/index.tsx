@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+
 import { tmdbApi } from '../../services/tmdbApi';
 
 import { MovieList } from '../../components/MovieList';
@@ -24,25 +26,31 @@ export default function Movie({
   horrorMovies
 }: MoviePageProps) {
   return (
-    <Container>
-      <h1>Trending now</h1>
-      <MovieList movies={trendingMovies} />
+    <>
+      <Head>
+        <title>Jetflix | Movies</title>
+      </Head>
 
-      <h1>Comedy</h1>
-      <MovieList movies={comedyMovies} />
+      <Container>
+        <h1>Trending now</h1>
+        <MovieList movies={trendingMovies} />
 
-      <h1>Action</h1>
-      <MovieList movies={actionMovies} />
+        <h1>Comedy</h1>
+        <MovieList movies={comedyMovies} />
 
-      <h1>Drama</h1>
-      <MovieList movies={dramaMovies} />
+        <h1>Action</h1>
+        <MovieList movies={actionMovies} />
 
-      <h1>Romance</h1>
-      <MovieList movies={romanceMovies} />
+        <h1>Drama</h1>
+        <MovieList movies={dramaMovies} />
 
-      <h1>Horror</h1>
-      <MovieList movies={horrorMovies} />
-    </Container>
+        <h1>Romance</h1>
+        <MovieList movies={romanceMovies} />
+
+        <h1>Horror</h1>
+        <MovieList movies={horrorMovies} />
+      </Container>
+    </>
   );
 }
 

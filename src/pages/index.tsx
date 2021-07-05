@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 import { MovieList } from '../components/MovieList';
 import { Slider } from '../components/Slider';
@@ -31,15 +32,21 @@ export default function Home({
   tvShows 
 }: HomeProps) {
   return (
-    <Container>
-      <Slider movies={popularMovies} />
+    <>
+      <Head>
+        <title>Jetflix | Home</title>
+      </Head>
 
-      <h1>Movies</h1>
-      <MovieList movies={movies} />
+      <Container>
+        <Slider movies={popularMovies} />
 
-      <h1>TV Shows</h1>
-      <MovieList movies={tvShows} />
-    </Container>
+        <h1>Movies</h1>
+        <MovieList movies={movies} />
+
+        <h1>TV Shows</h1>
+        <MovieList movies={tvShows} />
+      </Container>
+    </>
   );
 }
 
