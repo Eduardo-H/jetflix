@@ -6,7 +6,7 @@ import { tmdbApi } from '../services/tmdbApi';
 
 import { Container } from './styles';
 
-type Movie = {
+export type Movie = {
   id: string;
   title: string;
   poster: string;

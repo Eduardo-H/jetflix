@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import Link, { LinkProps } from 'next/link';
 
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
@@ -40,9 +41,15 @@ export function Navbar() {
 
       <NavContent isOpen={isOpen}>
         <NavItems>
-          <a href="#">Home</a>
-          <a href="#">Movies</a>
-          <a href="#">TV Shows</a>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+          <Link href="/movies">
+            <a>Movies</a>
+          </Link>
+          <Link href="/">
+            <a>TV Shows</a>
+          </Link>
         </NavItems>
         
         <hr />
