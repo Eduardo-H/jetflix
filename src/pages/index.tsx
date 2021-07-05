@@ -65,6 +65,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     params: {
       api_key: process.env.TMDB_API_KEY,
       'release_date.lte': new Date(),
+      'vote_average.gte': 5,
       sort_by: 'popularity.desc',
       page: Math.floor(Math.random() * 10) + 1
     }
@@ -83,6 +84,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     params: {
       api_key: process.env.TMDB_API_KEY,
       'release_date.lte': new Date(),
+      'vote_average.gte': 5,
       sort_by: 'popularity.desc',
       page: Math.floor(Math.random() * 10) + 1
     }
