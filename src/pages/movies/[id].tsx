@@ -6,6 +6,8 @@ import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
+import { formatDate } from '../../utils/formatDate';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 import {
   Container,
@@ -238,11 +240,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // Setting all the data in a movie object
   const movie = {
     title: movieResponse.data.title,
-    releaseDate: new Date(movieResponse.data.release_date).toLocaleDateString('en-US', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
+    releaseDate: formatDate(movieResponse.data.release_date),
     duration: formatDuration(movieResponse.data.runtime),
     poster: `https://image.tmdb.org/t/p/original${movieResponse.data.poster_path}`,
     overview: movieResponse.data.overview,
@@ -252,14 +250,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     producers: movieResponse.data.production_companies.map(producer => producer.name).join(', '),
     video: video,
     countries: movieResponse.data.production_countries.map(country => country.name).join(', '),
-    budget: new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(movieResponse.data.budget),
-    revenue: new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(movieResponse.data.revenue)
+    budget: formatCurrency(movieResponse.data.budget),
+    revenue: formatCurrency(movieResponse.data.revenue)
   }
 
   // Fetching the movies that are similar to the one highlighted

@@ -6,6 +6,7 @@ import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
+import { formatDate } from '../../utils/formatDate';
 
 import {
   Container,
@@ -232,11 +233,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // Setting all the data in a TV Show object
   const show = {
     name: tvShowResponse.data.name,
-    releaseDate: new Date(tvShowResponse.data.release_date).toLocaleDateString('en-US', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
+    releaseDate: formatDate(tvShowResponse.data.first_air_date),
     seasons: tvShowResponse.data.seasons.length,
     poster: `https://image.tmdb.org/t/p/original${tvShowResponse.data.poster_path}`,
     overview: tvShowResponse.data.overview,
