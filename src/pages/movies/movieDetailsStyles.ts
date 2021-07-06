@@ -29,7 +29,7 @@ export const BackLink = styled.div`
   }
 `;
 
-export const MovieContainer = styled.div`
+export const MovieContainer = styled.section`
   display: flex;
   gap: 2rem;
 
@@ -113,6 +113,7 @@ export const InfoRow = styled.div`
 
 export const CastContainer = styled.div`
   padding-left: 4rem;
+  margin-bottom: 2rem;
   
   h2 {
     font-size: 2rem;
@@ -125,4 +126,26 @@ export const CastContainer = styled.div`
   @media (max-width:800px) {
     padding-left: 1rem;
   }
+`;
+
+export const SimilarMoviesContainer = styled.section`
+  padding: 0 5rem;
+
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width:800px) {
+    padding-left: 1rem;
+  }
+`;
+
+export const SimilarMovies = styled.div`
+  display: grid;
+  /* grid-template-columns: calc(max-content * 6); */
+  grid-gap: 1.5rem;
+  grid-template-columns: max-content max-content max-content max-content max-content max-content max-content max-content;
 `;

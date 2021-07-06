@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
+import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
 
 import { 
@@ -13,7 +14,9 @@ import {
   MoviePoster,
   MovieInfo,
   InfoRow,
-  CastContainer
+  CastContainer,
+  SimilarMoviesContainer,
+  SimilarMovies
 } from './movieDetailsStyles';
 
 export type Person = {
@@ -21,6 +24,12 @@ export type Person = {
   name: string;
   character?: string;
   profile?: string;
+}
+
+type SimilarMovie = {
+  id: string;
+  title: string;
+  poster: string;
 }
 
 type Movie = {
@@ -41,9 +50,10 @@ type Movie = {
 
 interface MovieDetailsProps {
   movie: Movie;
+  similarMovies: Array<SimilarMovie>;
 }
 
-export default function MovieDetails({ movie }: MovieDetailsProps) {
+export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps) {
   return (
     <>
       <Head>
@@ -134,6 +144,21 @@ export default function MovieDetails({ movie }: MovieDetailsProps) {
           <h2>Cast</h2>
           <CastSlider cast={movie.cast} />
         </CastContainer>
+
+        <SimilarMoviesContainer>
+          <h2>Similar Movies</h2>
+
+          <SimilarMovies>
+            {similarMovies.map(movie => (
+              <MovieCard 
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                poster={movie.poster}
+              />
+            ))}
+          </SimilarMovies>
+        </SimilarMoviesContainer>
       </Container>
     </>
   );
@@ -155,35 +180,38 @@ function formatDuration(duration: number) {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params;
 
+  // Fetching the movie's data
   const movieResponse = await tmdbApi.get(`movie/${id}`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
   });
 
+  // Fetching the list of people that were credit in the movie
   const creditsResponse = await tmdbApi.get(`/movie/${id}/credits`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
   });
 
-  const cast = creditsResponse.data.cast.map(person => {
-    if (person.profile_path) {
-      return {
-        id: String(person.id),
-        name: person.name,
-        character: person.character,
-        profile: `https://www.themoviedb.org/t/p/original${person.profile_path}`
-      }
-    } else {
-      return {
-        id: String(person.id),
-        name: person.name,
-        character: person.character
-      }
-    }    
+  // Fetching the movie's videos
+  const videoResponse = await tmdbApi.get(`/movie/${id}/videos`, {
+    params: {
+      api_key: process.env.TMDB_API_KEY
+    }
   });
 
+  // Building the cast array
+  const cast = creditsResponse.data.cast.map(person => {
+    return {
+      id: String(person.id),
+      name: person.name,
+      character: person.character,
+      profile: person.profile_path ? `https://www.themoviedb.org/t/p/original${person.profile_path}` : null
+    }  
+  });
+
+  // Building the directors array
   const directors = [];
   creditsResponse.data.crew.forEach(person => {
     if (person.job === 'Director') {
@@ -194,12 +222,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
   });
 
-  const videoResponse = await tmdbApi.get(`/movie/${id}/videos`, {
-    params: {
-      api_key: process.env.TMDB_API_KEY
-    }
-  });
-
   const youtubeVideos = videoResponse.data.results.filter(video => video.site === 'YouTube');
 
   let video = null;
@@ -207,6 +229,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     video = `https://www.youtube.com/watch?v=${youtubeVideos[0].key}`;
   }
 
+  // Setting all the data in a movie object
   const movie = {
     title: movieResponse.data.title,
     releaseDate: new Date(movieResponse.data.release_date).toLocaleDateString('en-US', {
@@ -233,9 +256,26 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }).format(movieResponse.data.revenue)
   }
 
+  // Fetching the movies that are similar to the one highlighted
+  const similarMoviesResponse = await tmdbApi.get(`/movie/${id}/similar`, {
+    params: {
+      api_key: process.env.TMDB_API_KEY
+    }
+  });
+
+  // Building the array of similar movies
+  const similarMovies: Array<SimilarMovie> = similarMoviesResponse.data.results.slice(0, 16).map(movie => {
+    return {
+      id: String(movie.id),
+      title: movie.title,
+      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
+    }
+  });
+
   return {
     props: {
-      movie
+      movie,
+      similarMovies
     }
   }
 }
