@@ -6,11 +6,14 @@ interface MovieCardProps {
   id: string;
   title: string;
   poster: string;
+  type: string;
 }
 
-export function MovieCard({ id, title, poster }: MovieCardProps) {
+export function MovieCard({ id, title, poster, type }: MovieCardProps) {
+  const detailsLink = type.toLowerCase() === 'movie' ? `/movies/${id}` : `/tv/${id}`;
+
   return (
-    <Link href={`/movies/${id}`}>
+    <Link href={detailsLink}>
       <Container>
         <img src={poster} alt={title} />
       </Container>

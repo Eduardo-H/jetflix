@@ -41,10 +41,10 @@ export default function Home({
         <MovieSlider movies={popularMovies} />
 
         <h1>Movies</h1>
-        <MovieList movies={movies} />
+        <MovieList movies={movies} type="Movie" />
 
         <h1>TV Shows</h1>
-        <MovieList movies={tvShows} />
+        <MovieList movies={tvShows} type="TV Show" />
       </Container>
     </>
   );

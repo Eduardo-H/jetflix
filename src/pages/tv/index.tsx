@@ -33,22 +33,22 @@ export default function Movie({
 
       <Container>
         <h1>Trending now</h1>
-        <MovieList movies={trendingShows} />
+        <MovieList movies={trendingShows} type="TV Show" />
 
         <h1>Comedy</h1>
-        <MovieList movies={comedyShows} />
+        <MovieList movies={comedyShows} type="TV Show" />
 
         <h1>Action</h1>
-        <MovieList movies={actionShows} />
+        <MovieList movies={actionShows} type="TV Show" />
 
         <h1>Drama</h1>
-        <MovieList movies={dramaShows} />
+        <MovieList movies={dramaShows} type="TV Show" />
 
         <h1>Romance</h1>
-        <MovieList movies={documentaryShows} />
+        <MovieList movies={documentaryShows} type="TV Show" />
 
         <h1>Horror</h1>
-        <MovieList movies={familyShows} />
+        <MovieList movies={familyShows} type="TV Show" />
       </Container>
     </>
   );

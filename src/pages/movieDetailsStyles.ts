@@ -40,7 +40,7 @@ export const MovieContainer = styled.section`
   }
 
   @media (max-width:800px) {
-    padding-left: 2rem;
+    padding: 0rem 2rem 2rem 2rem;
   }
 `;
 
@@ -79,6 +79,15 @@ export const MoviePoster = styled.div`
       filter: brightness(0.8);
     }
   }
+
+  @media (max-width:800px) {
+    margin-bottom: 2rem;
+
+    img {
+      width: 250px;
+      height: 350px;
+    }
+  }
 `;
 
 export const MovieInfo = styled.div`
@@ -98,6 +107,12 @@ export const MovieInfo = styled.div`
     margin-bottom: 1rem;
     text-align: justify;
   }
+
+  @media (max-width: 800px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const InfoRow = styled.div`
@@ -107,7 +122,7 @@ export const InfoRow = styled.div`
 
   @media (max-width:800px) {
     grid-template-columns: max-content;
-    gap: 0.5rem;
+    gap: 0;
   }
 `;
 
@@ -131,7 +146,6 @@ export const CastContainer = styled.div`
 export const SimilarMoviesContainer = styled.section`
   padding: 0 5rem;
 
-  
   h2 {
     font-size: 2rem;
     font-weight: 500;
@@ -139,13 +153,50 @@ export const SimilarMoviesContainer = styled.section`
   }
 
   @media (max-width:800px) {
-    padding-left: 1rem;
+    padding: 0 2rem;
   }
 `;
 
 export const SimilarMovies = styled.div`
   display: grid;
-  /* grid-template-columns: calc(max-content * 6); */
   grid-gap: 1.5rem;
-  grid-template-columns: max-content max-content max-content max-content max-content max-content max-content max-content;
+  grid-template-columns: repeat(8, max-content);
+
+  @media (max-width:1800px) {
+    justify-content: center;
+    grid-template-columns: repeat(7, max-content);
+  }
+
+  @media (max-width:1650px) {
+    grid-template-columns: repeat(6, max-content);
+  }
+
+  @media (max-width:1450px) {
+    grid-template-columns: repeat(5, max-content);
+  }
+
+  @media (max-width:1250px) {
+    grid-template-columns: repeat(4, max-content);
+  }
+
+  @media (max-width:1050px) {
+    grid-template-columns: repeat(3, max-content);
+  }
+
+  @media (max-width:800px) {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  @media (max-width:470px) {
+    grid-template-columns: repeat(1, max-content);
+  }
+`;
+
+export const NetworksContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  img {
+    width: 4rem;
+  }
 `;

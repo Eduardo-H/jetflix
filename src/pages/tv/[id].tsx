@@ -16,7 +16,8 @@ import {
   InfoRow,
   CastContainer,
   SimilarMoviesContainer,
-  SimilarMovies
+  SimilarMovies,
+  NetworksContainer
 } from '../movieDetailsStyles';
 
 export type Person = {
@@ -26,38 +27,44 @@ export type Person = {
   profile?: string;
 }
 
-type SimilarMovie = {
+type SimilarShow = {
   id: string;
-  title: string;
+  name: string;
   poster: string;
 }
 
-type Movie = {
-  title: string;
+type Network = {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+type TvShow = {
+  name: string;
   releaseDate: string;
-  duration?: string;
+  seasons: number;
   poster: string;
   overview?: string;
   genres: Array<string>;
-  directors: Array<Person>;
+  creators: Array<string>;
   cast: Array<Person>;
   producers: Array<string>;
   video: string | null;
   countries: Array<string>;
-  budget: number;
-  revenue: number;
+  status: string;
+  networks: Array<Network>;
 }
 
 interface MovieDetailsProps {
-  movie: Movie;
-  similarMovies: Array<SimilarMovie>;
+  show: TvShow;
+  similarShows: Array<SimilarShow>;
 }
 
-export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps) {
+export default function MovieDetails({ show, similarShows }: MovieDetailsProps) {
   return (
     <>
       <Head>
-        <title>Jetflix | {movie.title}</title>
+        <title>Jetflix | {show.name}</title>
       </Head>
 
       <BackLink>
@@ -71,7 +78,7 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
       <Container>
         <MovieContainer>
           <MoviePoster>
-            <img src={movie.poster} alt={movie.title} />
+            <img src={show.poster} alt={show.name} />
             <button>
               <AiOutlinePlayCircle />
               Watch trailer
@@ -79,61 +86,64 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
           </MoviePoster>
           
           <MovieInfo>
-            <h1>{movie.title}</h1>
+            <h1>{show.name}</h1>
 
             <h2>Overview</h2>
-            <p>{movie.overview}</p>
+            <p>{show.overview}</p>
 
             <div>
               <InfoRow>
                 <div>
                   <h2>Release Date</h2>
-                  <p>{movie.releaseDate}</p>
+                  <p>{show.releaseDate}</p>
                 </div>
 
                 <div>
-                  <h2>Duration</h2>
-                  <p>{movie.duration}</p>
+                  <h2>Seasons</h2>
+                  <p>{show.seasons}</p>
                 </div>
 
                 <div>
                   <h2>Genres</h2>
-                  <p>{movie.genres}</p>
+                  <p>{show.genres}</p>
                 </div>
               </InfoRow>
 
               <InfoRow>
                 <div>
                   <h2>Countries</h2>
-                  <p>{movie.countries}</p>
+                  <p>{show.countries}</p>
                 </div>
 
                 <div>
-                  <h2>Budget</h2>
-                  <p>{movie.budget}</p>
+                  <h2>Status</h2>
+                  <p>{show.status}</p>
                 </div>
 
                 <div>
-                  <h2>Revenue</h2>
-                  <p>{movie.revenue}</p>
+                  <h2>Creator(s)</h2>
+                  <p>{show.creators}</p>
                 </div>
               </InfoRow>
 
               <InfoRow>
                 <div>
-                  <h2>Director</h2>
-                  <p>
-                    {movie.directors.map(director => (
-                      <Link href="/" key={director.id}>
-                        <a>{director.name}</a>
-                      </Link>
-                    ))}
-                  </p>
-                </div>
-
-                <div>
                   <h2>Producers</h2>
-                  <p>{movie.producers}</p>
+                  <p>{show.producers}</p>
+                </div>
+              </InfoRow>
+
+              <InfoRow>
+                <div>
+                  <h2>Networks</h2>
+                  <NetworksContainer>
+                    {show.networks.map(network => (
+                      <Link href="/" key={network.id}>
+                        <img src={network.logo} alt={network.name} />
+                      </Link>                    
+                    ))}
+                  </NetworksContainer>
+                  
                 </div>
               </InfoRow>
             </div>
@@ -142,21 +152,21 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
 
         <CastContainer>
           <h2>Cast</h2>
-          <CastSlider cast={movie.cast} />
+          <CastSlider cast={show.cast} />
         </CastContainer>
 
-        {similarMovies.length > 0 && (
+        {similarShows.length > 0 && (
           <SimilarMoviesContainer>
             <h2>Similar Movies</h2>
 
             <SimilarMovies>
-              {similarMovies.map(movie => (
+              {similarShows.map(movie => (
                 <MovieCard 
                   key={movie.id}
                   id={movie.id}
-                  title={movie.title}
+                  title={movie.name}
                   poster={movie.poster}
-                  type="Movie"
+                  type="TV Show"
                 />
               ))}
             </SimilarMovies>
@@ -167,38 +177,25 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
   );
 }
 
-function formatDuration(duration: number) {
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
-
-  if (hours < 0) {
-    return `${minutes}m`;
-  } else if (minutes < 0) {
-    return `${hours}h`;
-  } else {
-    return `${hours}h ${minutes}m`;
-  }  
-}
-
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params;
 
-  // Fetching the movie's data
-  const movieResponse = await tmdbApi.get(`movie/${id}`, {
+  // Fetching the show's data
+  const tvShowResponse = await tmdbApi.get(`tv/${id}`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
   });
 
-  // Fetching the list of people that were credit in the movie
-  const creditsResponse = await tmdbApi.get(`/movie/${id}/credits`, {
+  // Fetching the list of people that were credit in the TV Show
+  const creditsResponse = await tmdbApi.get(`/tv/${id}/credits`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
   });
 
-  // Fetching the movie's videos
-  const videoResponse = await tmdbApi.get(`/movie/${id}/videos`, {
+  // Fetching the show's videos
+  const videoResponse = await tmdbApi.get(`/tv/${id}/videos`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
@@ -214,17 +211,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }  
   });
 
-  // Building the directors array
-  const directors = [];
-  creditsResponse.data.crew.forEach(person => {
-    if (person.job === 'Director') {
-      directors.push({
-        id: String(person.id),
-        name: person.name
-      });
-    }
-  });
-
   const youtubeVideos = videoResponse.data.results.filter(video => video.site === 'YouTube');
 
   let video = null;
@@ -232,53 +218,55 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     video = `https://www.youtube.com/watch?v=${youtubeVideos[0].key}`;
   }
 
-  // Setting all the data in a movie object
-  const movie = {
-    title: movieResponse.data.title,
-    releaseDate: new Date(movieResponse.data.release_date).toLocaleDateString('en-US', {
+  const networks = tvShowResponse.data.networks.map(network => {
+    return {
+      id: String(network.id),
+      name: network.name,
+      logo: network.logo_path ? `https://www.themoviedb.org/t/p/h50_filter(negate,000,666)${network.logo_path}` : null
+    }
+  })
+
+  // Setting all the data in a TV Show object
+  const show = {
+    name: tvShowResponse.data.name,
+    releaseDate: new Date(tvShowResponse.data.release_date).toLocaleDateString('en-US', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
     }),
-    duration: formatDuration(movieResponse.data.runtime),
-    poster: `https://image.tmdb.org/t/p/original${movieResponse.data.poster_path}`,
-    overview: movieResponse.data.overview,
-    genres: movieResponse.data.genres.map(genre => genre.name).join(', '),
-    directors: directors,
+    seasons: tvShowResponse.data.seasons.length,
+    poster: `https://image.tmdb.org/t/p/original${tvShowResponse.data.poster_path}`,
+    overview: tvShowResponse.data.overview,
+    genres: tvShowResponse.data.genres.map(genre => genre.name).join(', '),
+    creators: tvShowResponse.data.created_by.map(creator => creator.name).join(', '),
     cast: cast,
-    producers: movieResponse.data.production_companies.map(producer => producer.name).join(', '),
+    producers: tvShowResponse.data.production_companies.map(producer => producer.name).join(', '),
     video: video,
-    countries: movieResponse.data.production_countries.map(country => country.name).join(', '),
-    budget: new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(movieResponse.data.budget),
-    revenue: new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(movieResponse.data.revenue)
+    countries: tvShowResponse.data.production_countries.map(country => country.name).join(', '),
+    status: tvShowResponse.data.status,
+    networks: networks
   }
 
-  // Fetching the movies that are similar to the one highlighted
-  const similarMoviesResponse = await tmdbApi.get(`/movie/${id}/similar`, {
+  // Fetching the TV Show that are similar to the one highlighted
+  const similarShowsResponse = await tmdbApi.get(`/tv/${id}/similar`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
   });
 
-  // Building the array of similar movies
-  const similarMovies: Array<SimilarMovie> = similarMoviesResponse.data.results.slice(0, 16).map(movie => {
+  // Building the array of similar TV Shows
+  const similarShows: Array<SimilarShow> = similarShowsResponse.data.results.slice(0, 16).map(movie => {
     return {
       id: String(movie.id),
-      title: movie.title,
+      name: movie.name,
       poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
     }
   });
 
   return {
     props: {
-      movie,
-      similarMovies
+      show,
+      similarShows
     }
   }
 }

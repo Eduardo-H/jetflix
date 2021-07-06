@@ -18,9 +18,10 @@ type Movie = {
 
 interface MovieListInterface {
   movies: Array<Movie>;
+  type: string;
 }
 
-export function MovieList({ movies }: MovieListInterface) {
+export function MovieList({ movies, type }: MovieListInterface) {
   const [axisX, setAxisX] = useState(0);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -70,6 +71,7 @@ export function MovieList({ movies }: MovieListInterface) {
             id={movie.id}
             title={movie.title} 
             poster={movie.poster}
+            type={type}
           />
         ))
       }
