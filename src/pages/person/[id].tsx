@@ -1,7 +1,22 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+
+import { AiOutlineLeft } from 'react-icons/ai';
 import { tmdbApi } from '../../services/tmdbApi';
 import { Movie, TvShow } from '../index';
+import { formatDate } from '../../utils/formatDate';
+
+import {
+  Container,
+  BackLink,
+  ProfileContainer,
+  ProfileImage,
+  ProfileInfo,
+  InfoRow,
+  CreditsContainer
+} from '../profilePageStyles';
+import { MovieList } from '../../components/MovieList';
 
 type Person = {
   id: string;
@@ -14,6 +29,7 @@ type Person = {
   photo?: string;
   movieCredits: Array<Movie>;
   tvShowCredits: Array<TvShow>;
+  biography: string;
 }
 
 interface PersonProfileProps {
@@ -26,7 +42,78 @@ export default function PersonProfile({ person }: PersonProfileProps) {
       <Head>
         <title>Jetflix | {person.name}</title>
       </Head>
-      <h1>{person.gender}</h1>
+
+      <BackLink>
+        <Link href="/">
+          <a>
+            <AiOutlineLeft /> Back
+          </a>
+        </Link>
+      </BackLink>
+      
+      <Container>
+        <ProfileContainer>
+          <ProfileImage>
+            <img src={person.photo} alt={person.name} />
+          </ProfileImage>
+          
+          <ProfileInfo>
+            <h1>{person.name}</h1>
+
+            <h2>Biography</h2>
+            <p>{person.biography}</p>
+
+            <div>
+              <InfoRow>
+                <div>
+                  <h2>Birthday</h2>
+                  <p>{person.birthday}</p>
+                </div>
+
+                <div>
+                  <h2>Nationality</h2>
+                  <p>{person.nationality}</p>
+                </div>
+
+                <div>
+                  <h2>Gnnder</h2>
+                  <p>{person.gender}</p>
+                </div>
+              </InfoRow>
+
+              <InfoRow>
+                <div>
+                  <h2>Known for</h2>
+                  <p>{person.knownFor}</p>
+                </div>
+
+                {person.deathDate && (
+                  <div>
+                    <h2>Death Date</h2>
+                    <p>{person.deathDate}</p>
+                  </div>
+                )}
+              </InfoRow>
+            </div>
+          </ProfileInfo>
+        </ProfileContainer>
+
+        {person.movieCredits.length > 0 && (
+          <CreditsContainer>
+            <h2>Movie Credits</h2>
+
+            <MovieList movies={person.movieCredits} type="Movie" />
+          </CreditsContainer>
+        )}
+
+        {person.tvShowCredits.length > 0 && (
+          <CreditsContainer>
+            <h2>TV Show Credits</h2>
+
+            <MovieList movies={person.tvShowCredits} type="TV Show" />
+          </CreditsContainer>
+        )}
+      </Container>
     </>
   );
 }
@@ -106,14 +193,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const person = {
     id: String(personResponse.data.id),
     name: personResponse.data.name,
-    birthday: personResponse.data.birthday,
-    deathDate: personResponse.data.deathday,
+    birthday: formatDate(personResponse.data.birthday),
+    deathDate: personResponse.data.deathday ? formatDate(personResponse.data.deathday) : null,
     gender: genders[personResponse.data.gender],
     nationality: personResponse.data.place_of_birth,
     knownFor: personResponse.data.known_for_department,
     photo: personResponse.data.profile_path ?  `https://www.themoviedb.org/t/p/original${personResponse.data.profile_path}` : null,
     movieCredits,
-    tvShowCredits
+    tvShowCredits,
+    biography: personResponse.data.biography
   }
 
   return {

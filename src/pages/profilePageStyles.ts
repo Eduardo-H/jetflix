@@ -125,3 +125,20 @@ export const InfoRow = styled.div`
     gap: 0;
   }
 `;
+
+export const CreditsContainer = styled.div`
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding-left: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    h2 {
+      padding-left: 2rem;
+    }
+  }
+`;
