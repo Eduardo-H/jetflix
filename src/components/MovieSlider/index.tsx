@@ -23,7 +23,7 @@ interface SliderProps {
   movies: Array<Movie>;
 }
 
-export function Slider({ movies }: SliderProps) {
+export function MovieSlider({ movies }: SliderProps) {
   return (
     <Container>
       <Swiper 

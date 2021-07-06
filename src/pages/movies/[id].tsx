@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
+import { CastSlider } from '../../components/CastSlider';
 import { tmdbApi } from '../../services/tmdbApi';
 
 import { 
@@ -11,10 +12,11 @@ import {
   MovieContainer,
   MoviePoster,
   MovieInfo,
-  InfoRow
+  InfoRow,
+  CastContainer
 } from './movieDetailsStyles';
 
-type Person = {
+export type Person = {
   id: string;
   name: string;
   character?: string;
@@ -127,6 +129,11 @@ export default function MovieDetails({ movie }: MovieDetailsProps) {
             </div>
           </MovieInfo>
         </MovieContainer>
+
+        <CastContainer>
+          <h2>Cast</h2>
+          <CastSlider cast={movie.cast} />
+        </CastContainer>
       </Container>
     </>
   );

@@ -33,10 +33,14 @@ export const MovieContainer = styled.div`
   display: flex;
   gap: 2rem;
 
-  padding: 1rem 5rem;
+  padding: 2rem 5rem;
 
   @media (max-width: 1000px) {
     display: block;
+  }
+
+  @media (max-width:800px) {
+    padding-left: 2rem;
   }
 `;
 
@@ -100,4 +104,25 @@ export const InfoRow = styled.div`
   display: grid;
   grid-template-columns: max-content max-content max-content;
   gap: 3rem;
+
+  @media (max-width:800px) {
+    grid-template-columns: max-content;
+    gap: 0.5rem;
+  }
+`;
+
+export const CastContainer = styled.div`
+  padding-left: 4rem;
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 500;
+
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width:800px) {
+    padding-left: 1rem;
+  }
 `;

@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
 import { MovieList } from '../components/MovieList';
-import { Slider } from '../components/Slider';
+import { MovieSlider } from '../components/MovieSlider';
 import { tmdbApi } from '../services/tmdbApi';
 
 import { Container } from './styles';
@@ -38,7 +38,7 @@ export default function Home({
       </Head>
 
       <Container>
-        <Slider movies={popularMovies} />
+        <MovieSlider movies={popularMovies} />
 
         <h1>Movies</h1>
         <MovieList movies={movies} />
