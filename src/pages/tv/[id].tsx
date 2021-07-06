@@ -7,13 +7,16 @@ import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
 
-import { 
-  Container, 
+import {
+  Container,
   BackLink,
-  MovieContainer,
-  MoviePoster,
-  MovieInfo,
-  InfoRow,
+  ProfileContainer,
+  ProfileImage,
+  ProfileInfo,
+  InfoRow
+} from '../profilePageStyles';
+
+import {
   CastContainer,
   SimilarMoviesContainer,
   SimilarMovies,
@@ -55,12 +58,12 @@ type TvShow = {
   networks: Array<Network>;
 }
 
-interface MovieDetailsProps {
+interface TvShowProfileProps {
   show: TvShow;
   similarShows: Array<SimilarShow>;
 }
 
-export default function MovieDetails({ show, similarShows }: MovieDetailsProps) {
+export default function TvShowProfile({ show, similarShows }: TvShowProfileProps) {
   return (
     <>
       <Head>
@@ -76,16 +79,16 @@ export default function MovieDetails({ show, similarShows }: MovieDetailsProps) 
       </BackLink>
       
       <Container>
-        <MovieContainer>
-          <MoviePoster>
+        <ProfileContainer>
+          <ProfileImage>
             <img src={show.poster} alt={show.name} />
             <button>
               <AiOutlinePlayCircle />
               Watch trailer
             </button>
-          </MoviePoster>
+          </ProfileImage>
           
-          <MovieInfo>
+          <ProfileInfo>
             <h1>{show.name}</h1>
 
             <h2>Overview</h2>
@@ -147,8 +150,8 @@ export default function MovieDetails({ show, similarShows }: MovieDetailsProps) 
                 </div>
               </InfoRow>
             </div>
-          </MovieInfo>
-        </MovieContainer>
+          </ProfileInfo>
+        </ProfileContainer>
 
         <CastContainer>
           <h2>Cast</h2>

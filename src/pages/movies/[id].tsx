@@ -7,13 +7,16 @@ import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
 
-import { 
-  Container, 
+import {
+  Container,
   BackLink,
-  MovieContainer,
-  MoviePoster,
-  MovieInfo,
-  InfoRow,
+  ProfileContainer,
+  ProfileImage,
+  ProfileInfo,
+  InfoRow
+} from '../profilePageStyles';
+
+import {
   CastContainer,
   SimilarMoviesContainer,
   SimilarMovies
@@ -48,12 +51,12 @@ type Movie = {
   revenue: number;
 }
 
-interface MovieDetailsProps {
+interface MovieProfileProps {
   movie: Movie;
   similarMovies: Array<SimilarMovie>;
 }
 
-export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps) {
+export default function MovieProfile({ movie, similarMovies }: MovieProfileProps) {
   return (
     <>
       <Head>
@@ -69,16 +72,16 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
       </BackLink>
       
       <Container>
-        <MovieContainer>
-          <MoviePoster>
+        <ProfileContainer>
+          <ProfileImage>
             <img src={movie.poster} alt={movie.title} />
             <button>
               <AiOutlinePlayCircle />
               Watch trailer
             </button>
-          </MoviePoster>
+          </ProfileImage>
           
-          <MovieInfo>
+          <ProfileInfo>
             <h1>{movie.title}</h1>
 
             <h2>Overview</h2>
@@ -137,8 +140,8 @@ export default function MovieDetails({ movie, similarMovies }: MovieDetailsProps
                 </div>
               </InfoRow>
             </div>
-          </MovieInfo>
-        </MovieContainer>
+          </ProfileInfo>
+        </ProfileContainer>
 
         <CastContainer>
           <h2>Cast</h2>

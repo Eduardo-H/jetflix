@@ -12,9 +12,15 @@ export const Container = styled.div`
   img {
     width: 140px;
     height: 200px;
+    cursor: pointer;
 
     border-radius: 0.4rem;
     margin-bottom: 0.5rem;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.5);
+    }
   }
 
   p, span {
