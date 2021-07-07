@@ -8,6 +8,7 @@ import {
   ListControllerLeft, 
   ListControllerRight 
 } from './styles';
+import { useEffect } from 'react';
 
 
 type Movie = {
@@ -54,6 +55,15 @@ export function MovieList({ movies, type }: MovieListInterface) {
 
     setAxisX(x);
   }
+
+  useEffect(() => {
+    const paddingLeft = window.innerWidth > 800 ? 80 : 28;
+    const listWidth = (movies.length) * 220;
+
+    if (window.innerWidth - paddingLeft > listWidth) {
+      setShowRightArrow(false);
+    }
+  }, []);
 
   return (
     <Container axisX={axisX}>

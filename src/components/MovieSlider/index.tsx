@@ -49,7 +49,6 @@ export function MovieSlider({ movies }: SliderProps) {
                 </MovieInfo>
               </a>
             </Link>
-            
           </SwiperSlide>
         ))}
       </Swiper> 
