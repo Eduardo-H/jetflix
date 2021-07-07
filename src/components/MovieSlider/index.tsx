@@ -5,7 +5,7 @@ import SwiperCore, {
   Autoplay
 } from 'swiper/core';
 
-SwiperCore.use([Navigation, Pagination]);
+SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
@@ -16,7 +16,7 @@ import { Container, MovieInfo } from './styles';
 type Movie = {
   id: string;
   title: string;
-  backdrop: string;
+  backdrop?: string;
 }
 
 interface SliderProps {
@@ -33,7 +33,7 @@ export function MovieSlider({ movies }: SliderProps) {
           "clickable": true
         }}
         autoplay={{
-          "delay": 2500,
+          "delay": 3000,
           "disableOnInteraction": false
         }}
         loop={true}

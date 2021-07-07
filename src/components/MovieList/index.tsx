@@ -13,7 +13,7 @@ import {
 type Movie = {
   id: string;
   title: string;
-  poster: string;
+  poster: string | null;
 }
 
 interface MovieListInterface {

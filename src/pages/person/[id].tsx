@@ -17,6 +17,7 @@ import {
   CreditsContainer
 } from '../profilePageStyles';
 import { MovieList } from '../../components/MovieList';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 type Person = {
   id: string;
@@ -143,47 +144,37 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const tvShowCredits = [];
 
   movieCreditsResponse.data.cast.forEach(movie => {
-    const poster = movie.poster_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}` : null;
-
     movieCredits.push({
       id: String(movie.id),
       title: movie.title,
-      poster: poster,
-      backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+      poster: verifyImageExistence(movie.poster_path, 'small')
     });
   });
 
   movieCreditsResponse.data.crew.forEach(movie => {
-    const poster = movie.poster_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}` : null;
-
     if (movie.job === 'Director') {
       movieCredits.push({
         id: String(movie.id),
         title: movie.title,
-        poster: poster,
-        backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+        poster: verifyImageExistence(movie.poster_path, 'small')
       });
     }
   });
 
   tvShowCreditsResponse.data.cast.forEach(tvShow => {
-    const poster = tvShow.poster_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tvShow.poster_path}` : null;
-
     tvShowCredits.push({
       id: String(tvShow.id),
       name: tvShow.name,
-      poster: poster
+      poster: verifyImageExistence(tvShow.poster_path, 'small')
     });
   });
 
   tvShowCreditsResponse.data.crew.forEach(tvShow => {
-    const poster = tvShow.poster_path ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tvShow.poster_path}` : null;
-
     if (tvShow.job === 'Director') {
       tvShowCredits.push({
         id: String(tvShow.id),
         name: tvShow.name,
-        poster: poster
+        poster: verifyImageExistence(tvShow.poster_path, 'small')
       });
     }
   });
@@ -198,7 +189,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     gender: genders[personResponse.data.gender],
     nationality: personResponse.data.place_of_birth,
     knownFor: personResponse.data.known_for_department,
-    photo: personResponse.data.profile_path ?  `https://www.themoviedb.org/t/p/original${personResponse.data.profile_path}` : null,
+    photo: verifyImageExistence(personResponse.data.profile_path, 'original'),
     movieCredits,
     tvShowCredits,
     biography: personResponse.data.biography

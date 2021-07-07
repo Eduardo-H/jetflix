@@ -71,6 +71,6 @@ export const NetworksContainer = styled.div`
   gap: 1rem;
 
   img {
-    width: 4rem;
+    height: 1rem;
   }
 `;

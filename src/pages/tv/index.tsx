@@ -7,6 +7,7 @@ import { MovieList } from '../../components/MovieList';
 import { TvShow as TvShowProps } from '../index';
 
 import { Container } from './styles';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 interface MoviePageProps {
   trendingShows: Array<TvShowProps>;
@@ -70,7 +71,7 @@ async function getTvShowByGenreId(genreId: number) {
     return {
       id: String(item.id),
       title: item.name,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`
+      poster: verifyImageExistence(item.poster_path, 'small')
     }
   });
 
@@ -88,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: String(tvShow.id),
       title: tvShow.name,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tvShow.poster_path}`
+      poster: verifyImageExistence(tvShow.poster_path, 'small')
     }
   });
 

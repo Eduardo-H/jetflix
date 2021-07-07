@@ -117,8 +117,20 @@ export const ProfileInfo = styled.div`
 
 export const InfoRow = styled.div`
   display: grid;
-  grid-template-columns: max-content max-content max-content;
+  grid-template-columns: repeat(3, max-content);
   gap: 3rem;
+
+  p span {
+    position: absolute;
+    font-size: 0.75rem;
+    color: var(--gray-900);
+    
+    background: var(--green-500);
+    padding: 0.2rem 0.3rem;
+    margin-left: 0.5rem;
+    border-radius: 0.2rem;
+    transform: translateY(-10px);
+  }
 
   @media (max-width:800px) {
     grid-template-columns: max-content;

@@ -7,6 +7,7 @@ import { MovieList } from '../../components/MovieList';
 import { Movie as MovieProps } from '../index';
 
 import { Container } from './styles';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 interface MoviePageProps {
   trendingMovies: Array<MovieProps>;
@@ -69,8 +70,7 @@ async function getMoviesByGenreId(genreId: number) {
     return {
       id: String(item.id),
       title: item.title,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${item.poster_path}`,
-      backdrop: `https://image.tmdb.org/t/p/original${item.backdrop_path}`
+      poster: verifyImageExistence(item.poster_path, 'small')
     }
   });
 
@@ -88,8 +88,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: String(movie.id),
       title: movie.title,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
-      backdrop: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+      poster: verifyImageExistence(movie.poster_path, 'small')
     }
   });
 

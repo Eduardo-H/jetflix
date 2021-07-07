@@ -23,6 +23,7 @@ import {
   SimilarMovies,
   NetworksContainer
 } from '../movieDetailsStyles';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 export type Person = {
   id: string;
@@ -211,7 +212,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       id: String(person.id),
       name: person.name,
       character: person.character,
-      profile: person.profile_path ? `https://www.themoviedb.org/t/p/original${person.profile_path}` : null
+      profile: verifyImageExistence(person.profile_path, 'original')
     }  
   });
 
@@ -235,7 +236,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     name: tvShowResponse.data.name,
     releaseDate: formatDate(tvShowResponse.data.first_air_date),
     seasons: tvShowResponse.data.seasons.length,
-    poster: `https://image.tmdb.org/t/p/original${tvShowResponse.data.poster_path}`,
+    poster: verifyImageExistence(tvShowResponse.data.poster_path, 'small'),
     overview: tvShowResponse.data.overview,
     genres: tvShowResponse.data.genres.map(genre => genre.name).join(', '),
     creators: tvShowResponse.data.created_by.map(creator => creator.name).join(', '),
@@ -255,11 +256,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   });
 
   // Building the array of similar TV Shows
-  const similarShows: Array<SimilarShow> = similarShowsResponse.data.results.slice(0, 16).map(movie => {
+  const similarShows: Array<SimilarShow> = similarShowsResponse.data.results.slice(0, 16).map(tvShow => {
     return {
-      id: String(movie.id),
-      name: movie.name,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
+      id: String(tvShow.id),
+      name: tvShow.name,
+      poster: verifyImageExistence(tvShow.poster_path, 'small'),
     }
   });
 

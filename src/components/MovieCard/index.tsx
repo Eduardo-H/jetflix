@@ -5,7 +5,7 @@ import { Container } from './styles';
 interface MovieCardProps {
   id: string;
   title: string;
-  poster: string;
+  poster: string | null;
   type: string;
 }
 
@@ -15,7 +15,10 @@ export function MovieCard({ id, title, poster, type }: MovieCardProps) {
   return (
     <Link href={detailsLink}>
       <Container>
-        <img src={poster} alt={title} />
+        <img 
+          src={poster ? poster : '/images/no_poster.png'} 
+          alt={title} 
+        />
       </Container>
     </Link>
   )

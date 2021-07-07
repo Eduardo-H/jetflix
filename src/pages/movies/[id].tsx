@@ -23,6 +23,7 @@ import {
   SimilarMoviesContainer,
   SimilarMovies
 } from '../movieDetailsStyles';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 export type Person = {
   id: string;
@@ -41,7 +42,7 @@ type Movie = {
   title: string;
   releaseDate: string;
   duration?: string;
-  poster: string;
+  poster: string | null;
   overview?: string;
   genres: Array<string>;
   directors: Array<Person>;
@@ -59,6 +60,9 @@ interface MovieProfileProps {
 }
 
 export default function MovieProfile({ movie, similarMovies }: MovieProfileProps) {
+  const highlightedProducers = movie.producers.slice(0, 3).join(', ');
+  const otherProducersCount = movie.producers.length - 3;
+
   return (
     <>
       <Head>
@@ -76,7 +80,11 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
       <Container>
         <ProfileContainer>
           <ProfileImage>
-            <img src={movie.poster} alt={movie.title} />
+            <img 
+              src={movie.poster ? movie.poster : '/images/no_poster.png'} 
+              alt={movie.title} 
+            />
+            
             <button>
               <AiOutlinePlayCircle />
               Watch trailer
@@ -138,7 +146,13 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
 
                 <div>
                   <h2>Producers</h2>
-                  <p>{movie.producers}</p>
+                  <p>
+                    {highlightedProducers}
+
+                    { otherProducersCount > 0 && (
+                      <span>+ {otherProducersCount}</span>
+                    ) }
+                  </p>
                 </div>
               </InfoRow>
             </div>
@@ -215,7 +229,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       id: String(person.id),
       name: person.name,
       character: person.character,
-      profile: person.profile_path ? `https://www.themoviedb.org/t/p/original${person.profile_path}` : null
+      profile: verifyImageExistence(person.profile_path, 'original')
     }  
   });
 
@@ -242,12 +256,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     title: movieResponse.data.title,
     releaseDate: formatDate(movieResponse.data.release_date),
     duration: formatDuration(movieResponse.data.runtime),
-    poster: `https://image.tmdb.org/t/p/original${movieResponse.data.poster_path}`,
+    poster: verifyImageExistence(movieResponse.data.poster_path, 'small'),
     overview: movieResponse.data.overview,
     genres: movieResponse.data.genres.map(genre => genre.name).join(', '),
     directors: directors,
     cast: cast,
-    producers: movieResponse.data.production_companies.map(producer => producer.name).join(', '),
+    producers: movieResponse.data.production_companies.map(producer => producer.name),
     video: video,
     countries: movieResponse.data.production_countries.map(country => country.name).join(', '),
     budget: formatCurrency(movieResponse.data.budget),
@@ -266,7 +280,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return {
       id: String(movie.id),
       title: movie.title,
-      poster: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
+      poster: verifyImageExistence(movie.poster_path, 'small'),
     }
   });
 
