@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { 
   Navigation,
@@ -40,10 +41,15 @@ export function MovieSlider({ movies }: SliderProps) {
       >
         {movies.map(movie => (
           <SwiperSlide key={movie.id}>
-            <img src={movie.backdrop} alt={movie.title} />
-            <MovieInfo>
-              <h2>{movie.title}</h2>
-            </MovieInfo>            
+            <Link href={`movies/${movie.id}`}>
+              <a>
+                <img src={movie.backdrop} alt={movie.title} />
+                <MovieInfo>
+                  <h2>{movie.title}</h2>
+                </MovieInfo>
+              </a>
+            </Link>
+            
           </SwiperSlide>
         ))}
       </Swiper> 
