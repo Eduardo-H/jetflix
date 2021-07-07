@@ -41,15 +41,15 @@ export function Navbar() {
       <NavContent isOpen={isOpen}>
         <NavItems>
           <ActiveLink href="/">
-            <a>Home</a>
+            <a onClick={() => setIsOpen(false)}>Home</a>
           </ActiveLink>
           
           <ActiveLink href="/movies">
-            <a>Movies</a>
+            <a onClick={() => setIsOpen(false)}>Movies</a>
           </ActiveLink>
 
           <ActiveLink href="/tv">
-            <a>TV Shows</a>
+            <a onClick={() => setIsOpen(false)}>TV Shows</a>
           </ActiveLink>
         </NavItems>
         
