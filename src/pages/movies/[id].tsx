@@ -11,7 +11,6 @@ import { formatCurrency } from '../../utils/formatCurrency';
 
 import {
   Container,
-  BackLink,
   ProfileContainer,
   ProfileImage,
   ProfileInfo,
@@ -24,6 +23,7 @@ import {
   SimilarMovies
 } from '../movieDetailsStyles';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
+import { BackButton } from '../../components/BackButton';
 
 export type Person = {
   id: string;
@@ -69,13 +69,7 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
         <title>Jetflix | {movie.title}</title>
       </Head>
 
-      <BackLink>
-        <Link href="/">
-          <a>
-            <AiOutlineLeft /> Back
-          </a>
-        </Link>
-      </BackLink>
+      <BackButton />
       
       <Container>
         <ProfileContainer>

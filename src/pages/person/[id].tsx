@@ -1,15 +1,13 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 
-import { AiOutlineLeft } from 'react-icons/ai';
 import { tmdbApi } from '../../services/tmdbApi';
+import { BackButton } from '../../components/BackButton';
 import { Movie, TvShow } from '../index';
 import { formatDate } from '../../utils/formatDate';
 
 import {
   Container,
-  BackLink,
   ProfileContainer,
   ProfileImage,
   ProfileInfo,
@@ -44,13 +42,7 @@ export default function PersonProfile({ person }: PersonProfileProps) {
         <title>Jetflix | {person.name}</title>
       </Head>
 
-      <BackLink>
-        <Link href="/">
-          <a>
-            <AiOutlineLeft /> Back
-          </a>
-        </Link>
-      </BackLink>
+      <BackButton />
       
       <Container>
         <ProfileContainer>

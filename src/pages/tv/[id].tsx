@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
+import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
@@ -10,7 +10,6 @@ import { formatDate } from '../../utils/formatDate';
 
 import {
   Container,
-  BackLink,
   ProfileContainer,
   ProfileImage,
   ProfileInfo,
@@ -24,6 +23,8 @@ import {
   NetworksContainer
 } from '../movieDetailsStyles';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
+import React from 'react';
+import { BackButton } from '../../components/BackButton';
 
 export type Person = {
   id: string;
@@ -72,13 +73,7 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
         <title>Jetflix | {show.name}</title>
       </Head>
 
-      <BackLink>
-        <Link href="/">
-          <a>
-            <AiOutlineLeft /> Back
-          </a>
-        </Link>
-      </BackLink>
+      <BackButton />
       
       <Container>
         <ProfileContainer>
