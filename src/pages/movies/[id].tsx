@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { AiOutlineLeft, AiOutlinePlayCircle } from 'react-icons/ai';
+import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
 import { tmdbApi } from '../../services/tmdbApi';
@@ -88,8 +88,12 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
           <ProfileInfo>
             <h1>{movie.title}</h1>
 
-            <h2>Overview</h2>
-            <p>{movie.overview}</p>
+            {movie.overview && (
+              <>
+                <h2>Overview</h2>
+                <p>{movie.overview}</p>
+              </>
+            )}
 
             <div>
               <InfoRow>
@@ -130,11 +134,21 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
                 <div>
                   <h2>Director</h2>
                   <p>
-                    {movie.directors.map(director => (
-                      <Link href="/" key={director.id}>
-                        <a>{director.name}</a>
-                      </Link>
-                    ))}
+                    {movie.directors.map((director, index) => {
+                      if (index < movie.directors.length - 1) {
+                        return (
+                          <Link href={`/person/${director.id}`} key={director.id}>
+                            <a>{director.name}, </a>
+                          </Link>
+                        )                        
+                      } else {
+                        return (
+                          <Link href={`/person/${director.id}`} key={director.id}>
+                            <a>{director.name}</a>
+                          </Link>
+                        )
+                      }
+                    })}
                   </p>
                 </div>
 

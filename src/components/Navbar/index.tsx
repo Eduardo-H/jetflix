@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { ActiveLink } from '../../components/ActiveLink';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
@@ -39,7 +40,11 @@ export function Navbar() {
   return(
     <Container>
       <Logo>
-        <Image src={logoImg} alt="Jetflix logo" />
+        <Link href="/">
+          <a>
+            <Image src={logoImg} alt="Jetflix logo" />
+          </a>
+        </Link>
       </Logo>
 
       {

@@ -136,15 +136,21 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const tvShowCredits = [];
 
   movieCreditsResponse.data.cast.forEach(movie => {
-    movieCredits.push({
-      id: String(movie.id),
-      title: movie.title,
-      poster: verifyImageExistence(movie.poster_path, 'small')
-    });
+    const repeatedMovie = movieCredits.some(item => item.id === String(movie.id));
+
+    if (!repeatedMovie) {
+      movieCredits.push({
+        id: String(movie.id),
+        title: movie.title,
+        poster: verifyImageExistence(movie.poster_path, 'small')
+      });
+    }    
   });
 
   movieCreditsResponse.data.crew.forEach(movie => {
-    if (movie.job === 'Director') {
+    const repeatedMovie = movieCredits.some(item => item.id === String(movie.id));
+
+    if (movie.job === 'Director' && !repeatedMovie) {
       movieCredits.push({
         id: String(movie.id),
         title: movie.title,
@@ -153,16 +159,23 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
   });
 
+
   tvShowCreditsResponse.data.cast.forEach(tvShow => {
-    tvShowCredits.push({
-      id: String(tvShow.id),
-      name: tvShow.name,
-      poster: verifyImageExistence(tvShow.poster_path, 'small')
-    });
+    const repeatedShow = tvShowCredits.some(item => item.id === String(tvShow.id));
+
+    if (!repeatedShow) {
+      tvShowCredits.push({
+        id: String(tvShow.id),
+        name: tvShow.name,
+        poster: verifyImageExistence(tvShow.poster_path, 'small')
+      });
+    }
   });
 
   tvShowCreditsResponse.data.crew.forEach(tvShow => {
-    if (tvShow.job === 'Director') {
+    const repeatedShow = tvShowCredits.some(item => item.id === String(tvShow.id));
+
+    if (tvShow.job === 'Director' && !repeatedShow) {
       tvShowCredits.push({
         id: String(tvShow.id),
         name: tvShow.name,

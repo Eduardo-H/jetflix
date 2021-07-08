@@ -78,7 +78,7 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
       <Container>
         <ProfileContainer>
           <ProfileImage>
-            <img src={show.poster} alt={show.name} />
+            <img src={show.poster ? show.poster : '/images/no_poster.png'} alt={show.name} />
             <button>
               <AiOutlinePlayCircle />
               Watch trailer
@@ -88,8 +88,12 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
           <ProfileInfo>
             <h1>{show.name}</h1>
 
-            <h2>Overview</h2>
-            <p>{show.overview}</p>
+            {show.overview && (
+              <>
+                <h2>Overview</h2>
+                <p>{show.overview}</p>
+              </>
+            )}
 
             <div>
               <InfoRow>
@@ -138,9 +142,7 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
                   <h2>Networks</h2>
                   <NetworksContainer>
                     {show.networks.map(network => (
-                      <Link href="/" key={network.id}>
-                        <img src={network.logo} alt={network.name} />
-                      </Link>                    
+                      <img src={network.logo} alt={network.name} />                 
                     ))}
                   </NetworksContainer>
                   

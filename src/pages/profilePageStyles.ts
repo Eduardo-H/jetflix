@@ -108,6 +108,14 @@ export const InfoRow = styled.div`
     transform: translateY(-10px);
   }
 
+  a {
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--green-500);
+    }
+  }
+
   @media (max-width:800px) {
     grid-template-columns: max-content;
     gap: 0;
