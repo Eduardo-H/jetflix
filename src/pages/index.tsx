@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { MovieList } from '../components/MovieList';
 import { MovieSlider } from '../components/MovieSlider';
 import { tmdbApi } from '../services/tmdbApi';
-import { ORIGINAL_URL, POSTER_URL } from '../utils/urls';
 import { verifyImageExistence } from '../utils/verifyImageExistence';
 
 import { Container } from './styles';
@@ -33,6 +32,8 @@ export default function Home({
   movies, 
   tvShows 
 }: HomeProps) {
+  
+
   return (
     <>
       <Head>
