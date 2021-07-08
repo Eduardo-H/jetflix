@@ -154,3 +154,16 @@ export const CreditsContainer = styled.div`
     }
   }
 `;
+
+interface PosterSkeletonProps {
+  show: boolean;
+}
+
+export const PosterSkeleton = styled.div<PosterSkeletonProps>`
+  display: ${(props) => props.show ? 'block' : 'none'};
+  width: 350px;
+  height: 500px;
+  border-radius: 0.4rem;
+
+  background-color: var(--gray-700);
+`;

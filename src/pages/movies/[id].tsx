@@ -82,9 +82,9 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
           <ProfileImage>
             <img 
               src={movie.poster ? movie.poster : '/images/no_poster.png'} 
-              alt={movie.title} 
+              alt={movie.title}
             />
-            
+
             <button>
               <AiOutlinePlayCircle />
               Watch trailer

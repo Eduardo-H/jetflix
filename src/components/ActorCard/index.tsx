@@ -11,18 +11,17 @@ interface ActorCardProps {
 
 export function ActorCard({ actor }: ActorCardProps) {
   return (
-    <Container>
-      <Link href={`/person/${actor.id}`}>
-        {
-          actor.profile ? (
-            <img src={actor.profile} alt={actor.name} />
-          ) : (
-            <Image src={noProfileImg} alt={actor.name} />
-          )
-        }
-      </Link>
-      <p>{actor.name}</p>
-      <p>as <span>{actor.character}</span></p>
-    </Container>
+    <Link href={`/person/${actor.id}`}>
+      <Container>
+        { actor.profile ? (
+          <img src={actor.profile} alt={actor.name} />
+        ) : (
+          <Image src={noProfileImg} alt={actor.name} />
+        ) }
+
+        <p>{actor.name}</p>
+        <p>as <span>{actor.character}</span></p>
+      </Container>
+    </Link>
   );
 }
