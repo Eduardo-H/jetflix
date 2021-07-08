@@ -69,7 +69,7 @@ export default function PersonProfile({ person }: PersonProfileProps) {
                 </div>
 
                 <div>
-                  <h2>Gnnder</h2>
+                  <h2>Gender</h2>
                   <p>{person.gender}</p>
                 </div>
               </InfoRow>
