@@ -24,6 +24,9 @@ import {
 } from '../movieDetailsStyles';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { BackButton } from '../../components/BackButton';
+import { VideoPlayer } from '../../components/VideoPlayer';
+import { usePlayer } from '../../hooks/usePlayer';
+import { useEffect } from 'react';
 
 export type Person = {
   id: string;
@@ -60,14 +63,24 @@ interface MovieProfileProps {
 }
 
 export default function MovieProfile({ movie, similarMovies }: MovieProfileProps) {
+  const { showPlayer, hidePlayer, openPlayer } = usePlayer();
+  
   const highlightedProducers = movie.producers.slice(0, 3).join(', ');
   const otherProducersCount = movie.producers.length - 3;
+
+  useEffect(() => {
+    hidePlayer();
+  }, []);
 
   return (
     <>
       <Head>
         <title>Jetflix | {movie.title}</title>
       </Head>
+
+      { showPlayer && (
+        <VideoPlayer url={movie.video} />
+      ) }
 
       <BackButton />
       
@@ -79,10 +92,12 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
               alt={movie.title}
             />
 
-            <button>
-              <AiOutlinePlayCircle />
-              Watch trailer
-            </button>
+            {movie.video && (
+              <button onClick={openPlayer}>
+                <AiOutlinePlayCircle />
+                Watch trailer
+              </button>
+            )}
           </ProfileImage>
           
           <ProfileInfo>
@@ -211,7 +226,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params;
 
   // Fetching the movie's data
-  const movieResponse = await tmdbApi.get(`movie/${id}`, {
+  const movieResponse = await tmdbApi.get(`/movie/${id}`, {
     params: {
       api_key: process.env.TMDB_API_KEY
     }
@@ -252,11 +267,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
   });
 
-  const youtubeVideos = videoResponse.data.results.filter(video => video.site === 'YouTube');
+  let video = videoResponse.data.results.find(video => video.site === 'YouTube');
 
-  let video = null;
-  if (youtubeVideos.lenght > 0) {
-    video = `https://www.youtube.com/watch?v=${youtubeVideos[0].key}`;
+  if (video) {
+    video = `https://www.youtube.com/watch?v=${video.key}`
+  } else {
+    video = null;
   }
 
   // Setting all the data in a movie object

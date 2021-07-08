@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 
+import { PlayerProvider } from '../hooks/usePlayer';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Loader } from '../components/Loader';
@@ -18,8 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   Router.events.on('routeChangeComplete', (url) => {
     setIsLoading(false);
   });
+
   return (
-    <>
+    <PlayerProvider>
       <Navbar />
       {isLoading ? (
         <Loader />
@@ -29,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       
       <Footer />
       <GlobalStyles />
-    </>
+    </PlayerProvider>
   );
 }
 

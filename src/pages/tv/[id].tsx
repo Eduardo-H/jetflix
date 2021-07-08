@@ -23,8 +23,10 @@ import {
   NetworksContainer
 } from '../movieDetailsStyles';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BackButton } from '../../components/BackButton';
+import { usePlayer } from '../../hooks/usePlayer';
+import { VideoPlayer } from '../../components/VideoPlayer';
 
 export type Person = {
   id: string;
@@ -67,11 +69,21 @@ interface TvShowProfileProps {
 }
 
 export default function TvShowProfile({ show, similarShows }: TvShowProfileProps) {
+  const { showPlayer, hidePlayer, openPlayer } = usePlayer();
+
+  useEffect(() => {
+    hidePlayer();
+  }, []);
+
   return (
     <>
       <Head>
         <title>Jetflix | {show.name}</title>
       </Head>
+
+      { showPlayer && (
+        <VideoPlayer url={show.video} />
+      ) }
 
       <BackButton />
       
@@ -79,10 +91,13 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
         <ProfileContainer>
           <ProfileImage>
             <img src={show.poster ? show.poster : '/images/no_poster.png'} alt={show.name} />
-            <button>
-              <AiOutlinePlayCircle />
-              Watch trailer
-            </button>
+
+            {show.video && (
+              <button onClick={openPlayer}>
+                <AiOutlinePlayCircle />
+                Watch trailer
+              </button>
+            )}
           </ProfileImage>
           
           <ProfileInfo>
@@ -213,11 +228,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }  
   });
 
-  const youtubeVideos = videoResponse.data.results.filter(video => video.site === 'YouTube');
+  let video = videoResponse.data.results.find(video => video.site === 'YouTube');
 
-  let video = null;
-  if (youtubeVideos.lenght > 0) {
-    video = `https://www.youtube.com/watch?v=${youtubeVideos[0].key}`;
+  if (video) {
+    video = `https://www.youtube.com/watch?v=${video.key}`
+  } else {
+    video = null;
   }
 
   const networks = tvShowResponse.data.networks.map(network => {
