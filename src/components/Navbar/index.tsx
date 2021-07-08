@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
+
 import { ActiveLink } from '../../components/ActiveLink';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
@@ -18,6 +20,21 @@ import { SignInButton } from '../SignInButton';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const router = useRouter();
+
+  function handleSearch(event: FormEvent) {
+    event.preventDefault();
+
+    if (searchQuery.trim() === '')
+      return;
+    
+    router.push(`/search?query=${searchQuery}`);
+    
+    setIsOpen(false);
+    setSearchQuery('');
+  }
 
   return(
     <Container>
@@ -56,7 +73,14 @@ export function Navbar() {
         <hr />
 
         <NavActions>
-          <input type="text" placeholder="Search" />
+          <form method="get" onSubmit={handleSearch}>
+            <input 
+              type="text" 
+              placeholder="Search" 
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
+          </form>
 
           <SignInButton />
         </NavActions>
