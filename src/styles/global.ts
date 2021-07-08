@@ -60,4 +60,46 @@ export const GlobalStyles = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  .swiper-button-next, 
+  .swiper-button-prev {
+    top: 0 !important;
+    height: 100% !important;
+
+    color: var(--green-500) !important;
+    margin: 0rem 1rem !important;
+
+    &::after {
+      font-size: 2.25rem !important;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    width: 0.7rem !important;
+    height: 0.7rem !important;
+
+    background: var(--gray-500) !important;
+    opacity: 1 !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--green-500) !important;
+  }
+
+
+  @media (max-width: 768px) {
+    .swiper-button-next, 
+    .swiper-button-prev {
+      margin: 0rem 0.5rem !important;
+
+      &::after {
+        font-size: 1.5rem !important;
+      }
+    }
+
+    .swiper-pagination-bullet {
+      width: 0.75rem !important;
+      height: 0.75rem !important;
+    }
+  }
 `;
