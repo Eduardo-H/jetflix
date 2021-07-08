@@ -157,10 +157,9 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
                   <h2>Networks</h2>
                   <NetworksContainer>
                     {show.networks.map(network => (
-                      <img src={network.logo} alt={network.name} />                 
+                      <img src={network.logo} alt={network.name} key={network.id} />                 
                     ))}
                   </NetworksContainer>
-                  
                 </div>
               </InfoRow>
             </div>
@@ -177,12 +176,12 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
             <h2>Similar Movies</h2>
 
             <SimilarMovies>
-              {similarShows.map(movie => (
+              {similarShows.map(show => (
                 <MovieCard 
-                  key={movie.id}
-                  id={movie.id}
-                  title={movie.name}
-                  poster={movie.poster}
+                  key={show.id}
+                  id={show.id}
+                  title={show.name}
+                  poster={show.poster}
                   type="TV Show"
                 />
               ))}
