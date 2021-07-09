@@ -6,7 +6,7 @@ import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { Movie as MovieProps } from '../index';
 import { tmdbApi } from '../../services/tmdbApi';
 
-import { Container } from './styles';
+import { Container } from '../../styles/home';
 
 interface MoviePageProps {
   trendingMovies: Array<MovieProps>;

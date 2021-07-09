@@ -6,7 +6,7 @@ import { MovieSlider } from '../components/MovieSlider';
 import { tmdbApi } from '../services/tmdbApi';
 import { verifyImageExistence } from '../utils/verifyImageExistence';
 
-import { Container } from './styles';
+import { Container } from '../styles/home';
 
 export type Movie = {
   id: string;

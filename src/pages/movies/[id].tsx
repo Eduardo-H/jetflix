@@ -24,13 +24,13 @@ import {
   ProfileImage,
   ProfileInfo,
   InfoRow
-} from '../profilePageStyles';
+} from '../../styles/profilePage';
 
 import {
   CastContainer,
   SimilarMoviesContainer,
   SimilarMovies
-} from '../movieDetailsStyles';
+} from '../../styles/movieDetails';
 
 export type Person = {
   id: string;

@@ -6,7 +6,7 @@ import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { TvShow as TvShowProps } from '../index';
 import { tmdbApi } from '../../services/tmdbApi';
 
-import { Container } from './styles';
+import { Container } from '../../styles/home';
 
 interface MoviePageProps {
   trendingShows: Array<TvShowProps>;

@@ -18,7 +18,7 @@ import {
   ProfileInfo,
   InfoRow,
   CreditsContainer
-} from '../profilePageStyles';
+} from '../../styles/profilePage';
 
 type Person = {
   id: string;

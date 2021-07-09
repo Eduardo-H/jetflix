@@ -11,7 +11,7 @@ import { tmdbApi } from '../../services/tmdbApi';
 import noPosterImg from '../../assets/no_poster.png';
 import noProfileImg from '../../assets/no_profile.png';
 
-import { Container, ResultsList, ResultCard } from './styles';
+import { Container, ResultsList, ResultCard } from '../../styles/search';
 
 type Person = {
   id: string;
