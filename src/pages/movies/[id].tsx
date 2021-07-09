@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -5,9 +6,14 @@ import Link from 'next/link';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
 import { MovieCard } from '../../components/MovieCard';
-import { tmdbApi } from '../../services/tmdbApi';
+import { BackButton } from '../../components/BackButton';
+import { VideoPlayer } from '../../components/VideoPlayer';
+
+import { usePlayer } from '../../hooks/usePlayer';
 import { formatDate } from '../../utils/formatDate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
+import { tmdbApi } from '../../services/tmdbApi';
 
 import {
   Container,
@@ -22,11 +28,6 @@ import {
   SimilarMoviesContainer,
   SimilarMovies
 } from '../movieDetailsStyles';
-import { verifyImageExistence } from '../../utils/verifyImageExistence';
-import { BackButton } from '../../components/BackButton';
-import { VideoPlayer } from '../../components/VideoPlayer';
-import { usePlayer } from '../../hooks/usePlayer';
-import { useEffect } from 'react';
 
 export type Person = {
   id: string;

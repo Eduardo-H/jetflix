@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { tmdbApi } from '../../services/tmdbApi';
 import { BackButton } from '../../components/BackButton';
-import { Movie, TvShow } from '../index';
+import { MovieList } from '../../components/MovieList';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { formatDate } from '../../utils/formatDate';
+import { Movie, TvShow } from '../index';
+import { tmdbApi } from '../../services/tmdbApi';
 
 import {
   Container,
@@ -14,8 +16,6 @@ import {
   InfoRow,
   CreditsContainer
 } from '../profilePageStyles';
-import { MovieList } from '../../components/MovieList';
-import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 type Person = {
   id: string;

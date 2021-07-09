@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
+import { MovieList } from '../../components/MovieList';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
+import { TvShow as TvShowProps } from '../index';
 import { tmdbApi } from '../../services/tmdbApi';
 
-import { MovieList } from '../../components/MovieList';
-import { TvShow as TvShowProps } from '../index';
-
 import { Container } from './styles';
-import { verifyImageExistence } from '../../utils/verifyImageExistence';
 
 interface MoviePageProps {
   trendingShows: Array<TvShowProps>;

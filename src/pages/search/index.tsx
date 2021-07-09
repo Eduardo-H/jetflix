@@ -2,10 +2,10 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { BiMovie } from 'react-icons/bi';
+import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { Movie, TvShow } from '..';
 import { tmdbApi } from '../../services/tmdbApi';
-import { verifyImageExistence } from '../../utils/verifyImageExistence';
-import { BiMovie } from 'react-icons/bi';
 
 import { Container, ResultsList, ResultCard } from './styles';
 

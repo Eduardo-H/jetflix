@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <NextAuthProvider session={pageProps.session}>
       <PlayerProvider>
         <Navbar />
+        
         {isLoading ? (
           <Loader />
         ) : (
