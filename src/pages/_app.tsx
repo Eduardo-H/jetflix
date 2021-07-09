@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
+import { Provider as NextAuthProvider } from 'next-auth/client';
 
 import { PlayerProvider } from '../hooks/usePlayer';
 import { Navbar } from '../components/Navbar';
@@ -21,17 +22,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <PlayerProvider>
-      <Navbar />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Component {...pageProps} />
-      )}
-      
-      <Footer />
-      <GlobalStyles />
-    </PlayerProvider>
+    <NextAuthProvider session={pageProps.session}>
+      <PlayerProvider>
+        <Navbar />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Component {...pageProps} />
+        )}
+        
+        <Footer />
+        <GlobalStyles />
+      </PlayerProvider>
+    </NextAuthProvider>
   );
 }
 

@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.13.1",
     "next": "11.0.1",
+    "next-auth": "^3.27.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
@@ -21,6 +22,7 @@
     "swiper": "^6.7.5"
   },
   "devDependencies": {
+    "@types/next-auth": "^3.15.0",
     "@types/node": "^15.14.0",
     "@types/react": "^17.0.13",
     "@types/styled-components": "^5.1.10",

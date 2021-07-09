@@ -17,7 +17,13 @@ export const Container = styled.button`
 
   svg {
     font-size: 1.25rem;
-  }  
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
 
   &:hover {
     color: var(--green-500);
