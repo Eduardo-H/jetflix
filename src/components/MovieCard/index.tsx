@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
+import noPosterImg from '../../assets/no_poster.png';
 
 import { Container } from './styles';
 
@@ -15,10 +18,13 @@ export function MovieCard({ id, title, poster, type }: MovieCardProps) {
   return (
     <Link href={detailsLink}>
       <Container>
-        <img 
-          src={poster ? poster : '/images/no_poster.png'} 
-          alt={title} 
-        />
+        {poster ? (
+          <img src={poster} alt={title} />
+        ) : (
+          <div className="no-poster">
+            <Image src={noPosterImg} alt={title}/>
+          </div>
+        )}        
       </Container>
     </Link>
   )

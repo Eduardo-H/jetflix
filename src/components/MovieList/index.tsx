@@ -70,6 +70,7 @@ export function MovieList({ movies, type }: MovieListInterface) {
       <ListControllerLeft 
         onClick={handleLeftArrowClick} 
         show={showLeftArrow}
+        className="list-controller"
       >
         <BsChevronLeft />
       </ListControllerLeft>      
@@ -89,6 +90,7 @@ export function MovieList({ movies, type }: MovieListInterface) {
       <ListControllerRight 
         onClick={handleRightArrowClick} 
         show={showRightArrow}
+        className="list-controller"
       >
         <BsChevronRight />
       </ListControllerRight>

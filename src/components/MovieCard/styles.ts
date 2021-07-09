@@ -6,7 +6,7 @@ export const Container = styled.button`
   border: 0;
   background: transparent;
 
-  img {
+  img, .no-poster {
     border-radius: 0.35rem;
     width: 200px;
     height: 300px;

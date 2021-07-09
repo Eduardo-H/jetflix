@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
@@ -11,6 +12,8 @@ import { formatDate } from '../../utils/formatDate';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { usePlayer } from '../../hooks/usePlayer';
 import { tmdbApi } from '../../services/tmdbApi';
+
+import noPosterImg from '../../assets/no_poster.png';
 
 import {
   Container,
@@ -92,7 +95,13 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
       <Container>
         <ProfileContainer>
           <ProfileImage>
-            <img src={show.poster ? show.poster : '/images/no_poster.png'} alt={show.name} />
+            {show.poster ? (
+              <img src={show.poster} alt={show.name} />
+            ) : (
+              <div className="profile-img">
+                <Image src={noPosterImg} alt={show.name} />
+              </div>
+            )}
 
             {show.video && (
               <button onClick={openPlayer}>

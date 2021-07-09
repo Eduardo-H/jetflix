@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 
 import { BackButton } from '../../components/BackButton';
 import { MovieList } from '../../components/MovieList';
@@ -7,6 +8,8 @@ import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { formatDate } from '../../utils/formatDate';
 import { Movie, TvShow } from '../index';
 import { tmdbApi } from '../../services/tmdbApi';
+
+import noProfileImg from '../../assets/no_profile.png';
 
 import {
   Container,
@@ -47,7 +50,13 @@ export default function PersonProfile({ person }: PersonProfileProps) {
       <Container>
         <ProfileContainer>
           <ProfileImage>
-            <img src={person.photo} alt={person.name} />
+            { person.photo ? (
+              <img src={person.photo} alt={person.name} />
+            ) : (
+              <div className="profile-img">
+                <Image src={noProfileImg} alt={person.name} />
+              </div>
+            ) }
           </ProfileImage>
           
           <ProfileInfo>

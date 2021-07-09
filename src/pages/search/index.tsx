@@ -1,11 +1,15 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { BiMovie } from 'react-icons/bi';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { Movie, TvShow } from '..';
 import { tmdbApi } from '../../services/tmdbApi';
+
+import noPosterImg from '../../assets/no_poster.png';
+import noProfileImg from '../../assets/no_profile.png';
 
 import { Container, ResultsList, ResultCard } from './styles';
 
@@ -50,10 +54,11 @@ export default function Search({
                     <ResultCard key={movie.id}>
                       <Link href={`/movies/${movie.id}`}>
                         <a>
-                          <img 
-                            src={movie.poster ? movie.poster : '/images/no_poster.png'} 
-                            alt={movie.title} 
-                          />
+                          {movie.poster ? (
+                            <img src={movie.poster} alt={movie.title} />
+                          ) : (
+                            <Image src={noPosterImg} alt={movie.title} />
+                          )}
                         </a>
                       </Link>
                     </ResultCard>
@@ -71,10 +76,11 @@ export default function Search({
                     <ResultCard key={tvShow.id}>
                       <Link href={`/tv/${tvShow.id}`}>
                         <a>
-                          <img 
-                            src={tvShow.poster ? tvShow.poster : '/images/no_poster.png'} 
-                            alt={tvShow.title} 
-                          />
+                          {tvShow.poster ? (
+                            <img src={tvShow.poster} alt={tvShow.title} />
+                          ) : (
+                            <Image src={noPosterImg} alt={tvShow.title} />
+                          )}
                         </a>
                       </Link>
                     </ResultCard>
@@ -92,10 +98,11 @@ export default function Search({
                     <ResultCard key={person.id}>
                       <Link href={`/person/${person.id}`}>
                         <a>
-                          <img 
-                            src={person.profile ? person.profile : '/images/no_profile.png'} 
-                            alt={person.name} 
-                          />
+                          {person.profile ? (
+                            <img src={person.profile} alt={person.name} />
+                          ) : (
+                            <Image src={noProfileImg} alt={person.name} />
+                          )}
                         </a>
                       </Link>
                       

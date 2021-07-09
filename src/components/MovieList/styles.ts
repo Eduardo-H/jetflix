@@ -20,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
     padding-left: 2rem;
   }
 
-  div {
+  .list-controller {
     position: absolute;
     height: 300px;
     padding: 0 2rem;
@@ -43,7 +43,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   &:hover {
-    div {
+    .list-controller {
       opacity: 1;
     }
   }

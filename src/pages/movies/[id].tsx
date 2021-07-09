@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { CastSlider } from '../../components/CastSlider';
@@ -14,6 +15,8 @@ import { formatDate } from '../../utils/formatDate';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { verifyImageExistence } from '../../utils/verifyImageExistence';
 import { tmdbApi } from '../../services/tmdbApi';
+
+import noPosterImg from '../../assets/no_poster.png';
 
 import {
   Container,
@@ -88,11 +91,14 @@ export default function MovieProfile({ movie, similarMovies }: MovieProfileProps
       <Container>
         <ProfileContainer>
           <ProfileImage>
-            <img 
-              src={movie.poster ? movie.poster : '/images/no_poster.png'} 
-              alt={movie.title}
-            />
-
+            {movie.poster ? (
+              <img src={movie.poster} alt={movie.title} />
+            ) : (
+              <div className="profile-img">
+                <Image src={noPosterImg} alt={movie.title} />
+              </div>
+            )}
+            
             {movie.video && (
               <button onClick={openPlayer}>
                 <AiOutlinePlayCircle />

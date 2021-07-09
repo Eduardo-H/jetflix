@@ -26,7 +26,7 @@ export const ProfileImage = styled.div`
   flex-direction: column;
   gap: 1.5rem;
 
-  img {
+  img, .profile-img {
     width: 350px;
     height: 500px;
     border-radius: 0.4rem;
