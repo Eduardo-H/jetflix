@@ -105,12 +105,20 @@ export const NavActions = styled.div`
 
   input {
     height: 2.5rem;
-    padding: 0 0.75rem;
+    padding: 0 0.75rem 0 2.5rem;
     color: var(--white);
     border: 0;
     border-radius: 0.4rem;
 
     background: var(--gray-700);
+  }
+
+  svg {
+    position: absolute;
+    height: 100%;
+    padding: 0 0.7rem;
+    min-width: 2.6rem;
+    color: var(--gray-500);
   }
 
   @media (max-width: 800px) {

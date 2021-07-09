@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { ActiveLink } from '../../components/ActiveLink';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { BiSearch } from 'react-icons/bi';
 
 import logoImg from '../../assets/logo.png';
 
@@ -79,6 +80,7 @@ export function Navbar() {
 
         <NavActions>
           <form method="get" onSubmit={handleSearch}>
+            <BiSearch />
             <input 
               type="text" 
               placeholder="Search" 
