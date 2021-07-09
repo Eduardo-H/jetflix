@@ -103,6 +103,15 @@ export const NavActions = styled.div`
   display: flex;
   gap: 2rem;
 
+  
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const SearchForm = styled.form`
   input {
     height: 2.5rem;
     padding: 0 0.75rem 0 2.5rem;
@@ -122,7 +131,8 @@ export const NavActions = styled.div`
   }
 
   @media (max-width: 800px) {
-    flex-direction: column;
-    align-items: center;
+    svg {
+      height: 2.5rem;
+    }
   }
 `;

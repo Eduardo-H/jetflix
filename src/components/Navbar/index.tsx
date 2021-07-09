@@ -15,7 +15,8 @@ import {
   NavControl, 
   NavContent, 
   NavItems, 
-  NavActions
+  NavActions, 
+  SearchForm
 } from './styles';
 import { SignInButton } from '../SignInButton';
 
@@ -79,7 +80,7 @@ export function Navbar() {
         <hr />
 
         <NavActions>
-          <form method="get" onSubmit={handleSearch}>
+          <SearchForm method="get" onSubmit={handleSearch}>
             <BiSearch />
             <input 
               type="text" 
@@ -87,7 +88,7 @@ export function Navbar() {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
-          </form>
+          </SearchForm>
 
           <SignInButton />
         </NavActions>
