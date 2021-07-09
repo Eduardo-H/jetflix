@@ -56,12 +56,12 @@ export const ProfileImage = styled.div`
     }
   }
 
-  @media (max-width:800px) {
+  @media (max-width:1000px) {
     margin-bottom: 2rem;
 
     img {
       width: 250px;
-      height: 350px;
+      height: 360px;
     }
   }
 `;
@@ -80,6 +80,7 @@ export const ProfileInfo = styled.div`
   }
 
   p {
+    max-width: 100%;
     margin-bottom: 1rem;
     text-align: justify;
   }
@@ -116,9 +117,19 @@ export const InfoRow = styled.div`
     }
   }
 
+  @media (max-width:1200px) {
+    &:last-child {
+      display: block;
+    }
+  }
+
   @media (max-width:800px) {
-    grid-template-columns: max-content;
+    grid-template-columns: 100%;
     gap: 0;
+
+    p span {
+      position: relative;
+    }
   }
 `;
 

@@ -24,33 +24,20 @@ export function CastSlider({ cast }: CastSliderProps) {
       slidesPerView={10}
       breakpoints={{
         "0": {
-          "slidesPerView": 1,
-          "spaceBetween": 0
+          "slidesPerView": 2
         },
-        "350": {
-          "slidesPerView": 2,
-          "spaceBetween": 20
+        "650": {
+          "slidesPerView": 4
         },
-        "450": {
-          "slidesPerView": 3,
-          "spaceBetween": 20
-        },
-        "768": {
-          "slidesPerView": 5,
-          "spaceBetween": 30
-        },
-        "1024": {
-          "slidesPerView": 6,
-          "spaceBetween": 0
+        "1000": {
+          "slidesPerView": 6
         },
         "1300": {
-          "slidesPerView": 8,
-          "spaceBetween": 0
+          "slidesPerView": 8
         },
         "1600": {
-          "slidesPerView": 10,
-          "spaceBetween": 0
-        }
+          "slidesPerView": 10
+        },
       }}
     >
       {cast.map(actor => (

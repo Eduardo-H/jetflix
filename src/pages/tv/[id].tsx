@@ -71,6 +71,9 @@ interface TvShowProfileProps {
 export default function TvShowProfile({ show, similarShows }: TvShowProfileProps) {
   const { showPlayer, hidePlayer, openPlayer } = usePlayer();
 
+  const highlightedProducers = show.producers.slice(0, 3).join(', ');
+  const otherProducersCount = show.producers.length - 3;
+
   useEffect(() => {
     hidePlayer();
   }, []);
@@ -148,7 +151,13 @@ export default function TvShowProfile({ show, similarShows }: TvShowProfileProps
               <InfoRow>
                 <div>
                   <h2>Producers</h2>
-                  <p>{show.producers}</p>
+                  <p>
+                    {highlightedProducers}
+
+                    { otherProducersCount > 0 && (
+                      <span>+ {otherProducersCount}</span>
+                    ) }
+                  </p>
                 </div>
               </InfoRow>
 
@@ -253,7 +262,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     genres: tvShowResponse.data.genres.map(genre => genre.name).join(', '),
     creators: tvShowResponse.data.created_by.map(creator => creator.name).join(', '),
     cast: cast,
-    producers: tvShowResponse.data.production_companies.map(producer => producer.name).join(', '),
+    producers: tvShowResponse.data.production_companies.map(producer => producer.name),
     video: video,
     countries: tvShowResponse.data.production_countries.map(country => country.name).join(', '),
     status: tvShowResponse.data.status,

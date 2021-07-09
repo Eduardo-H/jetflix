@@ -8,9 +8,13 @@ export const Container = styled.footer`
   padding: 2rem 0;
 
   span {
-    align-items: center;
     padding: 0 2px;
     color: var(--green-500);
+  
+    svg {
+      width: 14px;
+      height: 14px;
+    }
   }
 
   a {
