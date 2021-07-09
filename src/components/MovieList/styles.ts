@@ -47,6 +47,12 @@ export const Container = styled.div<ContainerProps>`
       opacity: 1;
     }
   }
+
+  @media (max-width:800px) {
+    .list-controller {
+      opacity: 1;
+    }
+  }
 `;
 
 interface ListControllerProps {
