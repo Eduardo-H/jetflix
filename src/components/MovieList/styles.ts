@@ -50,7 +50,16 @@ export const Container = styled.div<ContainerProps>`
 
   @media (max-width:800px) {
     .list-controller {
-      opacity: 1;
+      display: none;
+    }
+
+    overflow-x: auto;
+
+    margin: 0;
+    padding-right: 2rem;
+
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 `;
