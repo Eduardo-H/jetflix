@@ -60,28 +60,17 @@ export const ResultsList = styled.div`
     grid-template-columns: repeat(3, max-content);
   }
 
-  @media (max-width:800px) {
-    grid-template-columns: repeat(6, max-content);
+  @media (max-width:700px) {
+    grid-template-columns: repeat(2, max-content);
     gap: 0.6rem;
   }
 
-  @media (max-width:750px) {
-    grid-template-columns: repeat(5, max-content);
-  }
-
-  @media (max-width:600px) {
-    grid-template-columns: repeat(4, max-content);
-  }
-
   @media (max-width:500px) {
-    grid-template-columns: repeat(3, max-content);
-  }
-
-  @media (max-width:380px) {
+    justify-content: center;
     grid-template-columns: repeat(2, max-content);
   }
 
-  @media (max-width:280px) {
+  @media (max-width:360px) {
     grid-template-columns: repeat(1, max-content);
   }
 `;
@@ -109,28 +98,17 @@ export const ResultCard = styled.div`
     font-size: 1.2rem;
   }
 
-  @media (max-width:800px) {
+  @media (max-width:500px) {
     img {
-      width: 100px;
-      height: 145px;
-    }
-
-    p {
-      font-size: 1rem;
+      width: 150px;
+      height: 220px;
     }
   }
 
-  @media (max-width:280px) {
+  @media (max-width:360px) {
     img {
       width: 200px;
       height: 300px;
-    }
-  }
-
-  @media (max-width:240px) {
-    img {
-      width: 100px;
-      height: 145px;
     }
   }
 `;
