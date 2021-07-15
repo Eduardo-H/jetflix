@@ -62,6 +62,13 @@ export const SimilarMovies = styled.div`
   }
 
   @media (max-width:470px) {
+    img {
+      width: 150px;
+      height: 220px;
+    }
+  }
+
+  @media (max-width:360px) {
     grid-template-columns: repeat(1, max-content);
   }
 `;
