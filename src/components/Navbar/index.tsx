@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,6 +24,7 @@ import { SignInButton } from '../SignInButton';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef(null);
 
   const router = useRouter();
 
@@ -37,6 +38,7 @@ export function Navbar() {
     
     setIsOpen(false);
     setSearchQuery('');
+    searchInputRef.current.blur();
   }
 
   return(
@@ -86,6 +88,7 @@ export function Navbar() {
               type="text" 
               placeholder="Search" 
               value={searchQuery}
+              ref={searchInputRef}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
           </SearchForm>

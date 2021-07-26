@@ -41,7 +41,7 @@ export function MovieSlider({ movies }: SliderProps) {
       >
         {movies.map(movie => (
           <SwiperSlide key={movie.id}>
-            <Link href={`movies/${movie.id}`}>
+            <Link href={`/movies/${movie.id}`}>
               <a>
                 <img src={movie.backdrop} alt={movie.title} />
                 <MovieInfo>
