@@ -10,7 +10,7 @@ export const Container = styled.div`
     align-items: center;
     gap: 0.75rem;
 
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--white);
     transition: 0.2s;
 

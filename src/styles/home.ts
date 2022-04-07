@@ -5,6 +5,7 @@ export const Container = styled.main`
   padding-bottom: 2rem;
 
   h1 {
+    font-size: 1.75rem;
     font-weight: 500;
     padding: 1rem 5rem;
     margin-top: 1rem;

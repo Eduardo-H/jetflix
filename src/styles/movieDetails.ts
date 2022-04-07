@@ -5,7 +5,7 @@ export const CastContainer = styled.div`
   margin-bottom: 2rem;
   
   h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 500;
 
     padding-left: 1rem;
@@ -21,7 +21,7 @@ export const SimilarMoviesContainer = styled.section`
   padding: 0 5rem;
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
